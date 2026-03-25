@@ -3,7 +3,7 @@ package com.mahd.repository;
 import com.mahd.ForexRate;
 import io.quarkus.hibernate.orm.panache.PanacheRepository;
 import jakarta.enterprise.context.ApplicationScoped;
-
+import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -14,5 +14,10 @@ public class ForexRepository implements PanacheRepository<ForexRate> {
                 from.toUpperCase(),
                 to.toUpperCase())
                 .firstResultOptional();
+    }
+
+    //fetching all rates
+    public List<ForexRate> getAllRates() {
+        return listAll();
     }
 }

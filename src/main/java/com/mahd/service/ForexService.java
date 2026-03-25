@@ -4,7 +4,7 @@ import com.mahd.ForexRate;
 import com.mahd.repository.ForexRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
-
+import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
@@ -55,5 +55,10 @@ public class ForexService {
             throw new IllegalArgumentException(
                     "To currency required"
             );
+    }
+
+    //fetching all rates
+    public List<ForexRate> getAllRates() {
+        return repository.getAllRates();
     }
 }

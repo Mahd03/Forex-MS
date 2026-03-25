@@ -2,11 +2,12 @@ package com.mahd.resource;
 
 import com.mahd.ConversionResponse;
 import com.mahd.ForexRateRequest;
+import com.mahd.ForexRate;
 import com.mahd.service.ForexService;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.*;
-
 import jakarta.ws.rs.core.MediaType;
+import java.util.List;
 
 @Path("/")
 public class ForexResource {
@@ -48,4 +49,13 @@ public class ForexResource {
 
         return "Rate created successfully";
     }
+
+    //fetching all rates
+    @GET
+    @Path("/rates")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<ForexRate> getRates() {
+        return service.getAllRates();
+    }
+
 }
