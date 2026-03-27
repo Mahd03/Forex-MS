@@ -85,4 +85,22 @@ public class ForexService {
 
         repository.persist(forexRate);
     }
+
+    //get rate by id
+    public ForexRate getRate(Long id) {
+        return repository.findByIdOptional(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Rate not found")
+                    );
+    }
+
+    //deleting a currency rate
+    public void deleteRate(Long id) {
+
+        ForexRate rate = repository.findByIdOptional(id)
+                .orElseThrow(() ->
+                        new RuntimeException("Rate not found"));
+
+        repository.delete(rate);
+    }
 }

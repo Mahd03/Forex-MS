@@ -76,4 +76,20 @@ public class ForexResource {
         return "Rate updated successfully";
     }
 
+    //fetching rate by id
+    @GET
+    @Path("/rates/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ForexRate getRate(@PathParam("id") Long id) {
+        return service.getRate(id);
+    }
+
+    //deleting a currency rate
+    @DELETE
+    @Path("/rates/{id}")
+    public String deleteRate(@PathParam("id") Long id) {
+        service.deleteRate(id);
+        return "Rate deleted successfully";
+    }
+
 }
