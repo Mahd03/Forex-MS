@@ -58,4 +58,22 @@ public class ForexResource {
         return service.getAllRates();
     }
 
+    //updating existing rate
+    @PUT
+    @Path("/rates/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String updateRate(
+            @PathParam("id") Long id,
+            ForexRateRequest request) {
+
+        service.updateRate(
+                id,
+                request.fromCurrency,
+                request.toCurrency,
+                request.rate
+        );
+
+        return "Rate updated successfully";
+    }
+
 }

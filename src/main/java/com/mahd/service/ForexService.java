@@ -4,10 +4,12 @@ import com.mahd.ForexRate;
 import com.mahd.repository.ForexRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
 @ApplicationScoped
+@Transactional
 public class ForexService {
 
     @Inject
@@ -60,5 +62,27 @@ public class ForexService {
     //fetching all rates
     public List<ForexRate> getAllRates() {
         return repository.getAllRates();
+    }
+
+    //updating existing rate
+    public void updateRate(Long id, String from, String to, double rate) {
+
+        ForexRate forexRate = repository.findByIdOptional(id)
+                .orElseThrow(() ->
+                        new IllegalArgumentException("Rate not found"));
+
+        if (from != null && !from.isBlank()) {
+            forexRate.fromCurrency = from.toUpperCase();
+        }
+
+        if (to != null && !to.isBlank()) {
+            forexRate.toCurrency = to.toUpperCase();
+        }
+
+        if (rate > 0) {
+            forexRate.rate = rate;
+        }
+
+        repository.persist(forexRate);
     }
 }
