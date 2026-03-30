@@ -38,6 +38,7 @@ public class ForexResource {
     @POST
     @Path("/rates")
     @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public String createRate(
             ForexRateRequest request) {
 
